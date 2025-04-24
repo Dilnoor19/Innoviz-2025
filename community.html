@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FarmFresh Community Portal</title>
-    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai/dist/browser.min.js"></script>
     <style>
         :root {
             --primary: #4CAF50;
@@ -71,6 +70,12 @@
         .btn-primary {
             background-color: var(--primary);
             color: white;
+        }
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
         /* Community Portal Styles */
@@ -243,36 +248,32 @@
             background-color: #FFC107;
         }
         
-        /* Discussion Forum */
-        .discussion-list {
-            margin-top: 2rem;
-        }
-        .discussion-item {
-            padding: 1.5rem;
-            border-bottom: 1px solid #eee;
-            transition: all 0.2s;
-        }
-        .discussion-item:hover {
-            background-color: #f9f9f9;
-        }
-        .discussion-item h4 {
-            margin: 0 0 0.5rem 0;
-        }
-        .discussion-meta {
+        /* Typing indicator */
+        .typing-indicator {
             display: flex;
-            color: #777;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            padding: 10px;
         }
-        .discussion-meta span {
-            margin-right: 1rem;
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #666;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
         }
-        .discussion-excerpt {
-            color: #555;
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
         }
-        .message.admin i {
-            color: #666;
-            font-style: italic;
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
         }
         
         /* Responsive */
@@ -286,10 +287,6 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- Add this with your other meta tags -->
-
-    
 </head>
 <body>
     <header>
@@ -359,18 +356,10 @@
                             <p>Hello! I'm Sarah, your agricultural expert. How can I help you today?</p>
                             <div class="message-time">Today, 10:02 AM</div>
                         </div>
-                        <div class="message user">
-                            <p>Hi Sarah, I'm having issues with pests in my tomato plants. Can you help?</p>
-                            <div class="message-time">Today, 10:05 AM</div>
-                        </div>
-                        <div class="message admin">
-                            <p>Of course! Could you describe the pests or share a photo if possible? Also, what region are you farming in?</p>
-                            <div class="message-time">Today, 10:06 AM</div>
-                        </div>
                     </div>
                     <div class="chat-input">
                         <input type="text" id="messageInput" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
-                        <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                        <button class="btn btn-primary" id="sendButton" onclick="sendMessage()">Send</button>
                     </div>
                 </div>
                 
@@ -398,12 +387,12 @@
     </footer>
     
     <script>
-        // Gemini Chat Implementation
-        let geminiChat;
+        // Chat Implementation
         let currentAdmin = null;
         let typingIndicatorId = 0;
+        let isSending = false;
         
-        // Enhanced admin data with specialized prompts
+        // Admin data with predefined responses
         const admins = {
             admin1: {
                 name: "Sarah Johnson",
@@ -411,7 +400,13 @@
                 title: "Agronomy Expert",
                 status: "online",
                 expertise: "I specialize in crop management, soil health, and sustainable farming practices. How can I assist with your agricultural questions today?",
-                systemPrompt: "You are Sarah Johnson, an agronomy expert with 15 years of experience. Provide practical, science-based advice on crops, soil, and sustainable farming. Keep responses concise (2-3 sentences) unless more detail is requested. Focus on cost-effective solutions suitable for small to medium farms."
+                responses: {
+                    "default": "That's an interesting question about farming. As an agronomy expert, I'd recommend consulting our detailed guides in the Tutorials section for more comprehensive information.",
+                    "How do I test my soil pH?": "You can test your soil pH using a simple home test kit from your local garden store. For more accurate results, consider sending a sample to your local agricultural extension service.",
+                    "What are organic pest control methods?": "Organic pest control methods include introducing beneficial insects, using neem oil sprays, planting companion plants, and maintaining healthy soil to strengthen plants' natural defenses.",
+                    "Best crops for rainy season?": "Excellent question! For rainy seasons, consider crops like rice, taro, water spinach, and other water-loving plants. Root crops like taro and cassava also do well in wet conditions.",
+                    "How often should I water my crops?": "Watering frequency depends on your soil type and climate. As a general rule, most crops need about 1 inch of water per week, either from rainfall or irrigation."
+                }
             },
             admin2: {
                 name: "Michael Chen",
@@ -419,82 +414,18 @@
                 title: "Organic Farming Specialist",
                 status: "online",
                 expertise: "I'm an organic farming specialist. How can I help you with chemical-free pest control or regenerative agriculture?",
-                systemPrompt: "You are Michael Chen, an organic farming specialist. Provide advice on natural pest control, composting, crop rotation, and regenerative techniques. Emphasize organic certification standards when relevant. Responses should be 2-3 sentences maximum initially, with option to expand if asked."
+                responses: {
+                    "default": "Thanks for your organic farming question. I recommend checking our organic farming guides for detailed information on sustainable practices.",
+                    "How do I test my soil pH?": "For organic farming, I recommend using a simple vinegar and baking soda test as a starting point, but for precise measurements, a professional soil test is best.",
+                    "What are organic pest control methods?": "My top organic pest control methods are: 1) Companion planting, 2) Diatomaceous earth, 3) Homemade garlic/chili sprays, and 4) Encouraging predator insects like ladybugs.",
+                    "Best crops for rainy season?": "For organic farming in rainy seasons, consider water-tolerant varieties and focus on good drainage. Leafy greens, herbs, and certain root vegetables can do well with proper care.",
+                    "How often should I water my crops?": "In organic systems, we focus more on soil moisture retention through mulching and organic matter. Water deeply but less frequently to encourage strong root growth."
+                }
             }
         };
         
-        // Initialize Gemini when page loads
-        async function initializeGemini() {
-            try {
-                // In production, this should come from a secure backend
-                const API_KEY = await getApiKey(); 
-                
-                if (!API_KEY) {
-                    showApiWarning();
-                    return false;
-                }
-                
-                const genAI = new GoogleGenerativeAI(API_KEY);
-                const model = genAI.getGenerativeModel({ 
-                    model: "gemini-1.5-flash",
-                    generationConfig: {
-                        maxOutputTokens: 1000,
-                        temperature: 0.7,
-                    },
-                    safetySettings: [
-                        {
-                            category: "HARM_CATEGORY_HARASSMENT",
-                            threshold: "BLOCK_ONLY_HIGH"
-                        },
-                        {
-                            category: "HARM_CATEGORY_HATE_SPEECH",
-                            threshold: "BLOCK_ONLY_HIGH"
-                        }
-                    ]
-                });
-                
-                // Initialize with empty chat - we'll set history when admin is selected
-                geminiChat = model.startChat({
-                    history: []
-                });
-                
-                console.log("Gemini initialized successfully");
-                return true;
-            } catch (error) {
-                console.error("Gemini initialization error:", error);
-                addAdminMessage("Our expert system is currently unavailable. Basic assistance is still available.");
-                return false;
-            }
-        }
-        
-        // Secure API key handling (in production, replace with backend call)
-        async function getApiKey() {
-            return "AIzaSyAvnw_XPRrCXPG2hUrhn9DgU6a9G_K4KuQ"; 
-        }
-
-        
-        function showApiWarning() {
-            const warning = document.createElement('div');
-            warning.className = 'api-warning';
-            warning.innerHTML = `
-                <strong>Notice:</strong> AI features require configuration. 
-                <button onclick="promptForApiKey()" class="btn" style="padding: 0.2rem 0.5rem; margin-left: 0.5rem;">
-                    Enter API Key
-                </button>
-            `;
-            document.querySelector('.main-content').prepend(warning);
-        }
-        
-        function promptForApiKey() {
-            const key = prompt("Enter your Google Gemini API key (for demo purposes only - in production this should be handled server-side):");
-            if (key) {
-                localStorage.setItem('gemini_api_key', key);
-                location.reload();
-            }
-        }
-        
         // Start chat with selected admin
-        async function startChat(adminId) {
+        function startChat(adminId) {
             const admin = admins[adminId];
             currentAdmin = admin;
             document.getElementById('adminName').textContent = admin.name;
@@ -506,79 +437,62 @@
             
             // Add new welcome message
             addAdminMessage(admin.expertise);
-            
-            // Reinitialize chat with admin-specific prompt
-            if (geminiChat) {
-                try {
-                    const genAI = new GoogleGenerativeAI(await getApiKey());
-                    const model = genAI.getGenerativeModel({ 
-                        model: "gemini-1.5-flash",
-                        generationConfig: {
-                            maxOutputTokens: 1000,
-                            temperature: 0.7,
-                        }
-                    });
-                    
-                    geminiChat = model.startChat({
-                        history: [
-                            {
-                                role: "user",
-                                parts: [{ text: admin.systemPrompt }]
-                            },
-                            {
-                                role: "model",
-                                parts: [{ text: admin.expertise }]
-                            }
-                        ]
-                    });
-                } catch (error) {
-                    console.error("Error resetting chat:", error);
-                }
+        }
+        
+        // Handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
             }
         }
         
-        // Send message to Gemini
-        async function sendMessage() {
+        // Send message (simulated response)
+        function sendMessage() {
+            if (isSending) return;
+            
             const input = document.getElementById('messageInput');
             const message = input.value.trim();
+            const sendButton = document.getElementById('sendButton');
             
             if (!message) return;
+            
+            // Disable input while "sending"
+            input.disabled = true;
+            sendButton.disabled = true;
+            isSending = true;
             
             addUserMessage(message);
             input.value = '';
             
-            // If Gemini isn't available, use fallback
-            if (!geminiChat) {
-                setTimeout(() => {
-                    addAdminMessage("Our AI expert is currently unavailable. Please try again later.");
-                }, 1000);
-                return;
-            }
-            
             const typingId = showTypingIndicator();
             
-            try {
-                const result = await geminiChat.sendMessage(message);
-                const response = await result.response;
-                const text = response.text();
-                
-                removeTypingIndicator(typingId);
-                addAdminMessage(text);
-            } catch (error) {
-                console.error("Chat error:", error);
+            // Simulate response delay
+            setTimeout(() => {
                 removeTypingIndicator(typingId);
                 
-                let errorMessage = "I encountered an error processing your request. ";
-                if (error.message.includes("API_KEY")) {
-                    errorMessage += "There might be an issue with my knowledge base access.";
-                } else if (error.message.includes("network")) {
-                    errorMessage += "Network connection problem detected.";
-                } else {
-                    errorMessage += "Please try rephrasing your question.";
+                // Get response based on message or use default
+                let response = currentAdmin.responses.default;
+                for (const [question, answer] of Object.entries(currentAdmin.responses)) {
+                    if (message.toLowerCase().includes(question.toLowerCase())) {
+                        response = answer;
+                        break;
+                    }
                 }
                 
-                addAdminMessage(errorMessage);
-            }
+                addAdminMessage(response);
+                
+                // Re-enable input
+                input.disabled = false;
+                sendButton.disabled = false;
+                isSending = false;
+                input.focus();
+            }, 1500); // 1.5 second delay to simulate thinking
+        }
+        
+        // Quick question buttons
+        function quickQuestion(question) {
+            document.getElementById('messageInput').value = question;
+            document.getElementById('messageInput').focus();
         }
         
         // Helper functions
@@ -588,7 +502,14 @@
             const indicator = document.createElement('div');
             indicator.id = `typing-${id}`;
             indicator.className = 'message admin typing-indicator';
-            indicator.innerHTML = `<p><i>${currentAdmin ? currentAdmin.name.split(' ')[0] : 'Expert'} is typing...</i></p>`;
+            indicator.innerHTML = `
+                <p>${currentAdmin ? currentAdmin.name.split(' ')[0] : 'Expert'} is typing</p>
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
             chatMessages.appendChild(indicator);
             scrollToBottom();
             return id;
@@ -634,15 +555,12 @@
         }
         
         // Initialize when page loads
-        window.addEventListener('DOMContentLoaded', async () => {
-            await initializeGemini();
-            
+        window.addEventListener('DOMContentLoaded', () => {
             // Set default admin if none selected
             if (!currentAdmin) {
                 startChat('admin1');
             }
         });
     </script>
-
 </body>
 </html>
