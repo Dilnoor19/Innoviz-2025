@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmFresh | List Your Surplus</title>
+    <meta name="description" content="List your surplus farm produce on FarmFresh and connect with buyers in your area.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Improved CSS with better organization and modern styling */
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #8BC34A;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --light: #F1F8E9;
+            --lighter: #F8FBF5;
+            --dark: #1E3A1E;
+            --text: #333333;
+            --text-light: #666666;
+            --text-lighter: #999999;
+            --white: #FFFFFF;
+            --gray: #E0E0E0;
+            --danger: #F44336;
+            --success: #4CAF50;
+            --info: #2196F3;
+            --warning: #FF9800;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            --transition: all 0.3s ease;
+            
+            --header-height: 80px;
+            --footer-height: 120px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text);
+            background-color: var(--lighter);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            background: none;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            transition: var(--transition);
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 1rem 0;
+            position: relative;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+            padding: 1rem 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tractor-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .header-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .header-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 0.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            background-color: rgba(0, 50, 20, 0.7);
+            border: 1px solid rgba(0, 255, 174, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 174, 0.2);
+            backdrop-filter: blur(4px);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a i {
+            font-size: 1rem;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+        }
+        
+        .search-bar button {
+            padding: 0 1.5rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            font-weight: 500;
+        }
+        
+        .search-bar button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Main Content */
+        .main-content {
+            min-height: calc(100vh - var(--header-height) - var(--footer-height));
+            padding: 2rem 0;
+        }
+        
+        .page-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        /* Listing Container */
+        .listing-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Filter Sidebar */
+        .filter-sidebar {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+        
+        .filter-title {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--light);
+            color: var(--primary-dark);
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group h4 {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .filter-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+        
+        .filter-checkbox:hover {
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+        
+        .price-range {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .price-range input {
+            flex: 1;
+        }
+        
+        .price-range span {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+        
+        .filter-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Listings Grid */
+        .listings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sort-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .sort-control label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+        
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .listing-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .listing-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .listing-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .listing-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .listing-card:hover .listing-image {
+            transform: scale(1.05);
+        }
+        
+        .listing-details {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .listing-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .listing-farmer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+        
+        .farmer-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--light);
+        }
+        
+        .listing-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .listing-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .listing-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .listing-meta-item i {
+            font-size: 0.875rem;
+        }
+        
+        .listing-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+        
+        .listing-actions .btn {
+            flex: 1;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+        
+        .page-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            color: var(--text);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray);
+        }
+        
+        .page-link.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .page-link:hover:not(.active) {
+            background: var(--light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Create Listing Button */
+        .create-listing-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .create-listing-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: var(--transition);
+            margin: 1rem;
+        }
+        
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            width: 100%;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        /* Image Upload */
+        .image-upload {
+            border: 2px dashed var(--gray);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: var(--lighter);
+        }
+        
+        .image-upload:hover {
+            border-color: var(--primary);
+            background-color: rgba(76, 175, 80, 0.05);
+        }
+        
+        .image-upload input {
+            display: none;
+        }
+        
+        .image-upload-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .image-upload-text {
+            margin-bottom: 0.5rem;
+        }
+        
+        .image-upload-hint {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+        
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .preview-image {
+            height: 100px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            position: relative;
+        }
+        
+        .preview-remove {
+            position: absolute;
+            top: 0.25rem;
+            right: 0.25rem;
+            width: 20px;
+            height: 20px;
+            background-color: var(--danger);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .preview-image:hover .preview-remove {
+            opacity: 1;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .form-actions .btn {
+            flex: 1;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 2rem 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .footer-logo i {
+            color: var(--accent);
+        }
+        
+        .footer-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--white);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .listing-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-sidebar {
+                position: static;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0;
+                box-shadow: var(--shadow-md);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-title {
+                font-size: 1.5rem;
+            }
+            
+            .header-subtitle {
+                font-size: 0.875rem;
+            }
+            
+            .listing-actions {
+                flex-direction: column;
+            }
+            
+            .listing-actions .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+                border-radius: var(--radius-md);
+            }
+            
+            .search-bar input {
+                width: 100%;
+                border-radius: var(--radius-md) var(--radius-md) 0 0;
+            }
+            
+            .search-bar button {
+                width: 100%;
+                border-radius: 0 0 var(--radius-md) var(--radius-md);
+                padding: 0.75rem;
+            }
+            
+            .modal-container {
+                margin: 0.5rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mt-5 { margin-top: 3rem; }
+        
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mb-5 { margin-bottom: 3rem; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <i class="fas fa-tractor tractor-icon"></i>
+                    <h1 class="header-title">FarmFresh</h1>
+                </div>
+                <p class="header-subtitle">Empowering Farmers with Smart Agricultural Solutions</p>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="tutorial.html"><i class="fas fa-graduation-cap"></i> Tutorials</a>
+                <a href="weather.html"><i class="fas fa-cloud-sun"></i> Weather</a>
+                <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                <a href="about.html"><i class="fas fa-user-tie"></i> About</a>
+                <a href="listing.html" class="active"><i class="fas fa-tractor"></i> Farmer's Listing</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Farmers' Surplus Marketplace</h1>
+                <p>Connect directly with buyers and sell your surplus produce at fair prices</p>
+               
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Available Produce</h1>
+            
+            <div class="listing-container">
+                <!-- Filters Sidebar -->
+                <aside class="filter-sidebar">
+                    <h3 class="filter-title">Filter Listings</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Product Category</h4>
+                        <div class="filter-options">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Vegetables
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Fruits
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Grains
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Dairy
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Poultry
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Other
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Location</h4>
+                        <select class="form-control">
+                            <option>Anywhere</option>
+                            <option>Within 10km</option>
+                            <option>Within 25km</option>
+                            <option>Within 50km</option>
+                            <option>Within 100km</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Price Range (₹)</h4>
+                        <div class="price-range">
+                            <input type="number" class="form-control" placeholder="Min">
+                            <span>to</span>
+                            <input type="number" class="form-control" placeholder="Max">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Availability</h4>
+                        <div class="filter-options">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Available Now
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Upcoming Harvest
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Certifications</h4>
+                        <div class="filter-options">
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Organic Certified
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Pesticide-Free
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Local Farm
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button class="btn btn-primary">Apply Filters</button>
+                        <button class="btn btn-outline">Reset Filters</button>
+                    </div>
+                </aside>
+                
+                <!-- Listings Grid -->
+                <div class="listings-main">
+                    <div class="listings-header">
+                        <h3>124 Available Listings</h3>
+                        <div class="sort-control">
+                            <label>Sort by:</label>
+                            <select class="form-control" style="width: auto;">
+                                <option>Newest First</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Distance</option>
+                                <option>Popularity</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="listings-grid">
+                        <!-- Listing 1 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Organic</span>
+                                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Organic Potatoes</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="farmer-avatar">
+                                    <span>Rajesh Kumar</span>
+                                </div>
+                                <div class="listing-price">₹45/kg</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 200kg</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 12km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.8 (24)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Listing 2 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Fresh</span>
+                                <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Fresh Pineapples</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="farmer-avatar">
+                                    <span>Priya Sharma</span>
+                                </div>
+                                <div class="listing-price">₹80/kg</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 150kg</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 25km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.5 (18)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Listing 3 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Premium</span>
+                                <img src="https://th.bing.com/th/id/OIP.ag8a43MsHWHJja5dqDSgygHaE8?w=224&h=180&c=7&r=0&o=5&pid=1.7" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Basmati Rice</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/men/67.jpg" class="farmer-avatar">
+                                    <span>Vijay Patel</span>
+                                </div>
+                                <div class="listing-price">₹55/kg</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 500kg</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 8km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.9 (32)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>                                
+                            </div>
+                        </div>
+                        
+                        <!-- Listing 4 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Organic</span>
+                                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Fresh Milk</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/women/28.jpg" class="farmer-avatar">
+                                    <span>Sunita Devi</span>
+                                </div>
+                                <div class="listing-price">₹50/liter</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 100L/day</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 5km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.7 (45)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Listing 5 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Free Range</span>
+                                <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Free Range Eggs</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" class="farmer-avatar">
+                                    <span>Arun Singh</span>
+                                </div>
+                                <div class="listing-price">₹8/egg</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 500/week</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 15km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.9 (56)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Listing 6 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Organic</span>
+                                <img src="https://ammajeeorganics.in/wp-content/uploads/2020/12/63797959-1024x768.jpg" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Organic Wheat</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/men/82.jpg" class="farmer-avatar">
+                                    <span>Harish Yadav</span>
+                                </div>
+                                <div class="listing-price">₹35/kg</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 1000kg</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 30km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.6 (28)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Listing 7 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Fresh</span>
+                                <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Fresh Tomatoes</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/women/63.jpg" class="farmer-avatar">
+                                    <span>Meena Kumari</span>
+                                </div>
+                                <div class="listing-price">₹30/kg</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 300kg</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 10km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.4 (19)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Listing 8 -->
+                        <div class="listing-card fade-in">
+                            <div class="listing-image-container">
+                                <span class="listing-badge">Premium</span>
+                                <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="listing-image">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Mangoes (Alphonso)</h3>
+                                <div class="listing-farmer">
+                                    <img src="https://randomuser.me/api/portraits/men/45.jpg" class="farmer-avatar">
+                                    <span>Ramesh Iyer</span>
+                                </div>
+                                <div class="listing-price">₹120/kg</div>
+                                <div class="listing-meta">
+                                    <span class="listing-meta-item"><i class="fas fa-weight-hanging"></i> 150kg</span>
+                                    <span class="listing-meta-item"><i class="fas fa-map-marker-alt"></i> 18km</span>
+                                    <span class="listing-meta-item"><i class="fas fa-star"></i> 4.9 (42)</span>
+                                </div>
+                                <div class="listing-actions">
+                                    <a href="farmers(contact).html" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-phone-alt"></i> Contact
+                                    </a>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pagination">
+                        <a href="#" class="page-link active">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+                        <a href="#" class="page-link">4</a>
+                        <a href="#" class="page-link">5</a>
+                        <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Create Listing Button -->
+    <button class="create-listing-btn" id="createListingBtn">
+        <i class="fas fa-plus"></i>
+    </button>
+    
+    <!-- Create Listing Modal -->
+    <div class="modal-overlay" id="createListingModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">List Your Surplus Produce</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="listingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" class="form-control" placeholder="e.g., Organic Tomatoes" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option>Vegetables</option>
+                                <option>Fruits</option>
+                                <option>Grains</option>
+                                <option>Dairy</option>
+                                <option>Poultry</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Price (₹ per unit)</label>
+                            <input type="number" class="form-control" placeholder="e.g., 50" min="1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Available Quantity</label>
+                            <input type="number" class="form-control" placeholder="e.g., 100" min="1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Unit</label>
+                        <select class="form-control" required>
+                            <option>kg</option>
+                            <option>gram</option>
+                            <option>liter</option>
+                            <option>piece</option>
+                            <option>dozen</option>
+                            <option>bag (50kg)</option>
+                            <option>bunch</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Certifications (if any)</label>
+                        <div class="filter-options">
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Organic Certified
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Pesticide-Free
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Local Farm
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Product Images</label>
+                        <div class="image-upload" id="imageUpload">
+                            <i class="fas fa-cloud-upload-alt image-upload-icon"></i>
+                            <p class="image-upload-text">Click to upload images or drag and drop</p>
+                            <p class="image-upload-hint">Upload up to 5 images (JPEG, PNG)</p>
+                            <input type="file" id="productImages" multiple accept="image/*">
+                        </div>
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" rows="4" placeholder="Tell buyers about your product (quality, growing methods, etc.)"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Harvest Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Expiry Date (if applicable)</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" placeholder="Enter your farm location" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" placeholder="+91 9876543210" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email (optional)</label>
+                            <input type="email" class="form-control" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit Listing</button>
+                        <button type="button" id="cancelListing" class="btn btn-outline"><i class="fas fa-times"></i> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-tractor"></i>
+                        FarmFresh
+                    </div>
+                    <p class="footer-text">Connecting farmers directly with buyers to create a sustainable agricultural ecosystem.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About Us</a>
+                        <a href="tutorial.html">Tutorials</a>
+                        <a href="community.html">Community</a>
+                        <a href="listing.html">List Your Produce</a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <div class="footer-links">
+                        <a href="about.html">Terms of Service</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="community.html">Help Center</a>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 FarmFresh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Create listing modal functionality
+        const createListingBtn = document.getElementById('createListingBtn');
+        const createListingModal = document.getElementById('createListingModal');
+        const cancelListing = document.getElementById('cancelListing');
+        const modalClose = document.getElementById('modalClose');
+        
+        createListingBtn.addEventListener('click', () => {
+            createListingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        const closeModal = () => {
+            createListingModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+        
+        cancelListing.addEventListener('click', closeModal);
+        modalClose.addEventListener('click', closeModal);
+        
+        // Close modal when clicking outside
+        createListingModal.addEventListener('click', (e) => {
+            if (e.target === createListingModal) {
+                closeModal();
+            }
+        });
+        
+        // Image upload preview
+        const productImages = document.getElementById('productImages');
+        const imagePreview = document.getElementById('imagePreview');
+        const imageUpload = document.getElementById('imageUpload');
+        
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            imageUpload.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            imageUpload.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            imageUpload.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            imageUpload.style.borderColor = 'var(--primary)';
+            imageUpload.style.backgroundColor = 'rgba(76, 175, 80, 0.1)';
+        }
+        
+        function unhighlight() {
+            imageUpload.style.borderColor = 'var(--gray)';
+            imageUpload.style.backgroundColor = 'var(--lighter)';
+        }
+        
+        imageUpload.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+        
+        productImages.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        function handleFiles(files) {
+            imagePreview.innerHTML = '';
+            
+            if (files && files.length > 0) {
+                const validFiles = Array.from(files).slice(0, 5); // Limit to 5 images
+                
+                validFiles.forEach(file => {
+                    if (file.type.match('image.*')) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            const previewContainer = document.createElement('div');
+                            previewContainer.style.position = 'relative';
+                            
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.classList.add('preview-image');
+                            
+                            const removeBtn = document.createElement('span');
+                            removeBtn.classList.add('preview-remove');
+                            removeBtn.innerHTML = '&times;';
+                            removeBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                previewContainer.remove();
+                            });
+                            
+                            previewContainer.appendChild(img);
+                            previewContainer.appendChild(removeBtn);
+                            imagePreview.appendChild(previewContainer);
+                        }
+                        
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        }
+        
+        // Form submission
+        const listingForm = document.getElementById('listingForm');
+        
+        listingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+                    <h3 style="color: var(--success); margin-bottom: 1rem;">Listing Submitted Successfully!</h3>
+                    <p>Your produce listing has been submitted and will be visible to buyers shortly.</p>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" id="closeSuccess">Done</button>
+                </div>
+            `;
+            
+            const modalBody = document.querySelector('.modal-body');
+            modalBody.innerHTML = '';
+            modalBody.appendChild(successMessage);
+            
+            document.getElementById('closeSuccess').addEventListener('click', () => {
+                closeModal();
+                this.reset();
+                imagePreview.innerHTML = '';
+                modalBody.innerHTML = document.querySelector('form').outerHTML;
+            });
+            
+            // In a real app, you would send the form data to your server here
+            // const formData = new FormData(this);
+            // fetch('/api/listings', {
+            //     method: 'POST',
+            //     body: formData
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     // Handle success
+            // })
+            // .catch(error => {
+            //     // Handle error
+            // });
+        });
+        
+        // Responsive adjustment for nav links
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        }
+        
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initialize
+        
+        // Add animation to listing cards as they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.listing-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

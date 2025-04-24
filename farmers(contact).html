@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmFresh | Contact Farmers</title>
+    <meta name="description" content="Directly contact farmers through FarmFresh to inquire about produce and arrange purchases.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #8BC34A;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --light: #F1F8E9;
+            --lighter: #F8FBF5;
+            --dark: #1E3A1E;
+            --text: #333333;
+            --text-light: #666666;
+            --text-lighter: #999999;
+            --white: #FFFFFF;
+            --gray: #E0E0E0;
+            --danger: #F44336;
+            --success: #4CAF50;
+            --info: #2196F3;
+            --warning: #FF9800;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text);
+            background-color: var(--lighter);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+            padding: 1rem 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tractor-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .header-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .header-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 0.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            background-color: rgba(0, 50, 20, 0.7);
+            border: 1px solid rgba(0, 255, 174, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 174, 0.2);
+            backdrop-filter: blur(4px);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+        
+        /* Buyer Portal Hero */
+        .buyer-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .buyer-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .buyer-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .buyer-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Buyer Dashboard */
+        .buyer-dashboard {
+            padding: 3rem 0;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-title {
+            color: var(--primary-dark);
+        }
+        
+        .search-bar {
+            display: flex;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            padding: 0 1.25rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+        
+        /* Farmer Cards */
+        .farmers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .farmer-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .farmer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .farmer-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .farmer-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .farmer-card:hover .farmer-image {
+            transform: scale(1.05);
+        }
+        
+        .farmer-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .farmer-details {
+            padding: 1.5rem;
+        }
+        
+        .farmer-name {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .farmer-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .farmer-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .specialty-tag {
+            background-color: var(--light);
+            color: var(--primary-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .farmer-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        
+        .contact-farmer-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-farmer-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Contact Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: var(--transition);
+            margin: 1rem;
+        }
+        
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .farmer-contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .farmer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light);
+        }
+        
+        .farmer-contact-details h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            color: var(--primary-dark);
+        }
+        
+        .farmer-contact-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .contact-form .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            transition: var(--transition);
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        /* Messages Section */
+        .messages-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--light);
+        }
+        
+        .messages-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .messages-title {
+            color: var(--primary-dark);
+        }
+        
+        .messages-tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        
+        .tab-btn.active {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary);
+        }
+        
+        .messages-list {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .message-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light);
+            display: flex;
+            gap: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .message-item:last-child {
+            border-bottom: none;
+        }
+        
+        .message-item:hover {
+            background-color: var(--lighter);
+        }
+        
+        .message-item.unread {
+            background-color: rgba(33, 150, 243, 0.05);
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .message-content {
+            flex: 1;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+        
+        .message-sender {
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+        
+        .message-time {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        
+        .message-preview {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 2rem 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .footer-logo i {
+            color: var(--accent);
+        }
+        
+        .footer-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--white);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0;
+                box-shadow: var(--shadow-md);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .search-bar {
+                max-width: 100%;
+            }
+            
+            .buyer-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .buyer-hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .buyer-hero {
+                padding: 3rem 0;
+            }
+            
+            .buyer-hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <i class="fas fa-tractor tractor-icon"></i>
+                    <h1 class="header-title">FarmFresh</h1>
+                </div>
+                <p class="header-subtitle">Connecting buyers directly with local farmers</p>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="marketplace.html"><i class="fas fa-shopping-basket"></i> Marketplace</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
+                <a href="tutorial.html"><i class="fas fa-cog"></i>Knowlegde-hub</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Buyer Hero Section -->
+    <section class="buyer-hero">
+        <div class="container">
+            <div class="buyer-hero-content">
+                <h1>Connect Directly With Farmers</h1>
+                <p>Message farmers to ask questions, request custom orders, or arrange bulk purchases</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Buyer Dashboard -->
+    <main class="buyer-dashboard container">
+        <div class="dashboard-header">
+            <h2 class="dashboard-title">Available Farmers</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search farmers...">
+                <button type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <div class="farmers-grid">
+            <!-- Farmer Card 1 -->
+            <div class="farmer-card">
+                <div class="farmer-image-container">
+                    <img src="https://th.bing.com/th/id/OIP.CkbXn_on9IWNDOCrykJr1QHaE0?w=295&h=192&c=7&r=0&o=5&pid=1.7" class="farmer-image">
+                    <span class="farmer-badge">Organic Certified</span>
+                </div>
+                <div class="farmer-details">
+                    <h3 class="farmer-name">Rajesh Kumar</h3>
+                    <div class="farmer-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bangalore</span>
+                    </div>
+                    <div class="farmer-specialties">
+                        <span class="specialty-tag">Vegetables</span>
+                        <span class="specialty-tag">Organic</span>
+                        <span class="specialty-tag">Seasonal</span>
+                    </div>
+                    <div class="farmer-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">4.8</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Listings</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2h</div>
+                            <div class="stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                    <button class="contact-farmer-btn" data-farmer-id="1">
+                        <i class="fas fa-envelope"></i> Contact Farmer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Farmer Card 2 -->
+            <div class="farmer-card">
+                <div class="farmer-image-container">
+                    <img src="https://thumbs.dreamstime.com/z/indian-farmer-couple-walking-together-their-agriculture-green-field-inspecting-crop-harvesting-village-life-copy-191860062.jpg" class="farmer-image">
+                    <span class="farmer-badge">Free Range</span>
+                </div>
+                <div class="farmer-details">
+                    <h3 class="farmer-name">Priya Sharma</h3>
+                    <div class="farmer-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Mysore</span>
+                    </div>
+                    <div class="farmer-specialties">
+                        <span class="specialty-tag">Poultry</span>
+                        <span class="specialty-tag">Eggs</span>
+                        <span class="specialty-tag">Free Range</span>
+                    </div>
+                    <div class="farmer-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">4.6</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">15</div>
+                            <div class="stat-label">Listings</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4h</div>
+                            <div class="stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                    <button class="contact-farmer-btn" data-farmer-id="2">
+                        <i class="fas fa-envelope"></i> Contact Farmer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Farmer Card 3 -->
+            <div class="farmer-card">
+                <div class="farmer-image-container">
+                    <img src="https://th.bing.com/th/id/OIP.zYykv7sYQzhWr7rNZiynLwHaFc?w=1300&h=956&rs=1&pid=ImgDetMain" class="farmer-image">
+                    <span class="farmer-badge">Dairy Farm</span>
+                </div>
+                <div class="farmer-details">
+                    <h3 class="farmer-name">Vijay Patel</h3>
+                    <div class="farmer-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Tumkur</span>
+                    </div>
+                    <div class="farmer-specialties">
+                        <span class="specialty-tag">Dairy</span>
+                        <span class="specialty-tag">Milk</span>
+                        <span class="specialty-tag">Ghee</span>
+                    </div>
+                    <div class="farmer-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">4.9</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">32</div>
+                            <div class="stat-label">Listings</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">1h</div>
+                            <div class="stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                    <button class="contact-farmer-btn" data-farmer-id="3">
+                        <i class="fas fa-envelope"></i> Contact Farmer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Farmer Card 4 -->
+            <div class="farmer-card">
+                <div class="farmer-image-container">
+                    <img src="https://ddc514qh7t05d.cloudfront.net/dA/df96fb6f68c93ccbafe3415b0925a802/2400w/80q" class="farmer-image">
+                    <span class="farmer-badge">Organic Certified</span>
+                </div>
+                <div class="farmer-details">
+                    <h3 class="farmer-name">Rajpal yadav</h3>
+                    <div class="farmer-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>kashmir</span>
+                    </div>
+                    <div class="farmer-specialties">
+                        <span class="specialty-tag">Fruits</span>
+                        <span class="specialty-tag">Organic</span>
+                        <span class="specialty-tag">Mangoes</span>
+                    </div>
+                    <div class="farmer-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">4.7</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">18</div>
+                            <div class="stat-label">Listings</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3h</div>
+                            <div class="stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                    <button class="contact-farmer-btn" data-farmer-id="4">
+                        <i class="fas fa-envelope"></i> Contact Farmer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Farmer Card 5 -->
+            <div class="farmer-card">
+                <div class="farmer-image-container">
+                    <img src="https://www.visualsstock.com/images/Low/5/AK61916.jpg" class="farmer-image">
+                    <span class="farmer-badge">Grains</span>
+                </div>
+                <div class="farmer-details">
+                    <h3 class="farmer-name">Arun Singh</h3>
+                    <div class="farmer-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>ropad, patiala</span>
+                    </div>
+                    <div class="farmer-specialties">
+                        <span class="specialty-tag">Grains</span>
+                        <span class="specialty-tag">Rice</span>
+                        <span class="specialty-tag">Wheat</span>
+                    </div>
+                    <div class="farmer-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">4.5</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">22</div>
+                            <div class="stat-label">Listings</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">6h</div>
+                            <div class="stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                    <button class="contact-farmer-btn" data-farmer-id="5">
+                        <i class="fas fa-envelope"></i> Contact Farmer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Farmer Card 6 -->
+            <div class="farmer-card">
+                <div class="farmer-image-container">
+                    <img src="https://www.lightcastlebd.com/wp-content/uploads/2020/05/Farming_S-scaled.jpg" class="farmer-image">
+                    <span class="farmer-badge">Spices</span>
+                </div>
+                <div class="farmer-details">
+                    <h3 class="farmer-name">Harish Yadav</h3>
+                    <div class="farmer-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Andra Pradesh</span>
+                    </div>
+                    <div class="farmer-specialties">
+                        <span class="specialty-tag">Spices</span>
+                        <span class="specialty-tag">Coffee</span>
+                        <span class="specialty-tag">Pepper</span>
+                    </div>
+                    <div class="farmer-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">4.8</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">28</div>
+                            <div class="stat-label">Listings</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2h</div>
+                            <div class="stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                    <button class="contact-farmer-btn" data-farmer-id="6">
+                        <i class="fas fa-envelope"></i> Contact Farmer
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Messages Section -->
+        <section class="messages-section">
+            <div class="messages-header">
+                <h2 class="messages-title">Your Messages</h2>
+                <div class="messages-tabs">
+                    <button class="tab-btn active">All Messages</button>
+                    <button class="tab-btn">Unread</button>
+                    <button class="tab-btn">Archived</button>
+                </div>
+            </div>
+            
+            <div class="messages-list">
+                <!-- Message Item 1 -->
+                <div class="message-item">
+                    <img src="https://wallpaperaccess.com/full/4293166.jpg" class="message-avatar">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Rajesh Kumar</span>
+                            <span class="message-time">2 hours ago</span>
+                        </div>
+                        <p class="message-preview">Hi there! Thanks for your inquiry about my organic tomatoes. Yes, I can supply 50kg per week at ₹45/kg. Let me know if you'd like to place an order.</p>
+                    </div>
+                </div>
+                
+                <!-- Message Item 2 -->
+                <div class="message-item unread">
+                    <img src="https://img.freepik.com/premium-photo/young-indian-woman-farmer-working-wheat-farm-field_136354-2654.jpg" class="message-avatar">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Priya Sharma</span>
+                            <span class="message-time">1 day ago</span>
+                        </div>
+                        <p class="message-preview">Regarding your question about egg delivery - yes, we deliver to Bangalore city twice a week (Wednesdays and Saturdays). Minimum order is 5 dozen.</p>
+                    </div>
+                </div>
+                
+                <!-- Message Item 3 -->
+                <div class="message-item">
+                    <img src="https://th.bing.com/th/id/OIP.SS7OnpOpc3bnmh2J0QHRRQHaHa?rs=1&pid=ImgDetMain" class="message-avatar">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Vijay Patel</span>
+                            <span class="message-time">3 days ago</span>
+                        </div>
+                        <p class="message-preview">Thank you for your milk order! I've scheduled delivery for tomorrow morning between 7-9am. Please have someone available to receive it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Contact Farmer Modal -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Contact Farmer</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="farmer-contact-info">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="farmer-avatar">
+                    <div class="farmer-contact-details">
+                        <h3>Rajesh Kumar</h3>
+                        <p>Organic Vegetable Farmer • Bangalore</p>
+                        <p>Average response time: 2 hours</p>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="messageForm">
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Subject</label>
+                        <input type="text" class="form-control" id="subject" placeholder="e.g., Inquiry about organic tomatoes" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">Your Message</label>
+                        <textarea class="form-control" id="message" placeholder="Write your message to the farmer..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Attachments (Optional)</label>
+                        <input type="file" class="form-control" id="attachments" multiple>
+                        <small>Upload photos or documents to help explain your inquiry (max 5MB)</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        <button type="button" class="btn btn-outline" id="cancelMessage">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-tractor"></i>
+                        FarmFresh
+                    </div>
+                    <p class="footer-text">Connecting buyers directly with farmers to create a sustainable agricultural ecosystem.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="marketplace.html">Marketplace</a>
+                        <a href="farmers.html">Farmers</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 FarmFresh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Contact Farmer Modal
+        const contactModal = document.getElementById('contactModal');
+        const modalClose = document.getElementById('modalClose');
+        const cancelMessage = document.getElementById('cancelMessage');
+        const contactButtons = document.querySelectorAll('.contact-farmer-btn');
+        
+        const openModal = (farmerId) => {
+            // In a real app, we would fetch farmer data based on ID
+            console.log('Opening contact modal for farmer ID:', farmerId);
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        
+        const closeModal = () => {
+            contactModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+        
+        contactButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const farmerId = button.getAttribute('data-farmer-id');
+                openModal(farmerId);
+            });
+        });
+        
+        modalClose.addEventListener('click', closeModal);
+        cancelMessage.addEventListener('click', closeModal);
+        
+        // Close modal when clicking outside
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeModal();
+            }
+        });
+        
+        // Message form submission
+        const messageForm = document.getElementById('messageForm');
+        
+        messageForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate form
+            if (!subject || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // In a real app, we would send this data to the server
+            console.log('Message submitted:', { subject, message });
+            
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+                    <h3 style="color: var(--success); margin-bottom: 1rem;">Message Sent!</h3>
+                    <p>Your message has been sent to the farmer. You'll be notified when they respond.</p>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" id="closeSuccess">Close</button>
+                </div>
+            `;
+            
+            // Replace form with success message
+            messageForm.innerHTML = '';
+            messageForm.appendChild(successMessage);
+            
+            // Close success message
+            document.getElementById('closeSuccess').addEventListener('click', () => {
+                closeModal();
+                // Reset form for next use
+                messageForm.innerHTML = document.querySelector('.contact-form').innerHTML;
+                messageForm.addEventListener('submit', arguments.callee);
+            });
+        });
+        
+        // Message tabs functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // In a real app, we would filter messages based on the selected tab
+                console.log('Showing:', button.textContent);
+            });
+        });
+        
+        // Responsive adjustment for nav links
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        }
+        
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initialize
+    </script>
+</body>
+</html>

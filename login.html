@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmFresh - Secure Login</title>
+    <meta name="description" content="Secure login portal for FarmFresh agricultural management system">
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary: #8BC34A;
+            --light: #F1F8E9;
+            --dark: #2E7D32;
+            --accent: #FFC107;
+            --error: #F44336;
+            --text: #333;
+            --text-light: #666;
+            --white: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .login-container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--primary-dark);
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 38px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        button:hover, button:focus {
+            background-color: var(--primary-dark);
+            outline: none;
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .links a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .links a:hover {
+            text-decoration: underline;
+            color: var(--primary);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .divider::before {
+            margin-right: 10px;
+        }
+        
+        .divider::after {
+            margin-left: 10px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            color: var(--text);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .social-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .register-link a {
+            color: var(--primary-dark);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+            
+            .links {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <i class="fas fa-tractor"></i>
+            FarmFresh
+        </div>
+        <h2>Welcome Back</h2>
+        
+        <form id="loginForm" action="/api/login" method="POST">
+            <div class="input-group">
+                <label for="username">Email or Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username" placeholder="Enter your email or username">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Enter your password">
+                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            
+            <button type="submit" id="loginButton">
+                <span id="buttonText">Login</span>
+                <span id="buttonSpinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </button>
+            
+            <div class="links">
+                <a href="/forgot-password" id="forgotPassword">Forgot password?</a>
+                <a href="/resend-verification" id="resendVerification">Resend verification</a>
+            </div>
+            
+            <div class="divider">or</div>
+            
+            <div class="social-login">
+                <button type="button" class="social-btn" aria-label="Login with Google">
+                    <i class="fab fa-google"></i>
+                </button>
+                <button type="button" class="social-btn" aria-label="Login with Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button type="button" class="social-btn" aria-label="Login with Apple">
+                    <i class="fab fa-apple"></i>
+                </button>
+            </div>
+        </form>
+        
+        <div class="register-link">
+            Don't have an account? <a href="/register">Sign up</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Password toggle functionality
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+        
+            togglePassword.addEventListener('click', function () {
+                const isPassword = passwordInput.getAttribute('type') === 'password';
+                passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        
+            // Form submission handling
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+            const loginButton = document.getElementById('loginButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            const usernameInput = document.getElementById('username');
+        
+            loginForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+        
+                // Get form data
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+        
+                // Basic validation
+                if (!username || !password) {
+                    errorMessage.textContent = 'Please fill in both fields.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+        
+                // Show loading state
+                buttonText.style.display = 'none';
+                buttonSpinner.style.display = 'inline-block';
+                loginButton.disabled = true;
+        
+                try {
+                    // Simulate API call
+                    const response = await mockLoginApiCall(username, password);
+        
+                    if (response.success) {
+                        // Successful login - handle redirection based on role
+                        const role = response.user.role || 'user';
+                        if (role === 'admin') {
+                            window.location.href = '/admin-dashboard';
+                        } else {
+                            window.location.href = '/dashboard';
+                        }
+                    } else {
+                        errorMessage.textContent = response.message;
+                        errorMessage.style.display = 'block';
+                        passwordInput.focus();
+                    }
+                } catch (error) {
+                    errorMessage.textContent = 'An error occurred. Please try again.';
+                    errorMessage.style.display = 'block';
+                } finally {
+                    // Reset button state
+                    buttonText.style.display = 'inline-block';
+                    buttonSpinner.style.display = 'none';
+                    loginButton.disabled = false;
+                }
+            });
+        
+            // Mock API function (replace with actual fetch in production)
+            async function mockLoginApiCall(username, password) {
+                await new Promise(resolve => setTimeout(resolve, 1000)); // simulate delay
+        
+                const users = [
+                    { username: 'admin@farmfresh.com', password: 'SecurePass123!', role: 'admin' },
+                    { username: 'farmer@example.com', password: 'GreenFields2023', role: 'farmer' }
+                ];
+        
+                const user = users.find(u =>
+                    (u.username === username || u.email === username) &&
+                    u.password === password
+                );
+        
+                if (user) {
+                    return { success: true, user };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Invalid credentials. Please try again.'
+                    };
+                }
+            }
+        
+            // Hide error on input change
+            usernameInput.addEventListener('input', () => errorMessage.style.display = 'none');
+            passwordInput.addEventListener('input', () => errorMessage.style.display = 'none');
+        });
+        </script>
+        
+</body>
+</html>

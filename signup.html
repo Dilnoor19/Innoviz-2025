@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmFresh - Create Account</title>
+    <meta name="description" content="Create your FarmFresh account to access smart farming solutions">
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary: #8BC34A;
+            --light: #F1F8E9;
+            --dark: #2E7D32;
+            --accent: #FFC107;
+            --error: #F44336;
+            --success: #4CAF50;
+            --text: #333;
+            --text-light: #666;
+            --white: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .signup-container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signup-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--primary-dark);
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #eee;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+        
+        .step.active .step-number {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .step.completed .step-number::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+        
+        .step-label {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        .step.active .step-label {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .step.completed .step-label {
+            color: var(--success);
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .required::after {
+            content: '*';
+            color: var(--error);
+            margin-left: 4px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 38px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .password-strength {
+            height: 4px;
+            background-color: #eee;
+            margin-top: 8px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--error);
+            transition: width 0.3s ease;
+        }
+        
+        .password-hints {
+            margin-top: 5px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        
+        .password-hint {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+        
+        .password-hint i {
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        
+        .password-hint.valid {
+            color: var(--success);
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .success-message {
+            color: var(--success);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .btn[disabled] {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-spinner {
+            display: inline-block;
+            margin-right: 8px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .terms {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .terms a {
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .login-link a {
+            color: var(--primary-dark);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .signup-container {
+                padding: 30px 20px;
+            }
+            
+            .form-actions {
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">
+            <i class="fas fa-tractor"></i>
+            FarmFresh
+        </div>
+        <h2>Create Your Account</h2>
+        
+        <div class="progress-steps">
+            <div class="step active" id="step1">
+                <div class="step-number">1</div>
+                <div class="step-label">Account</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-number">2</div>
+                <div class="step-label">Profile</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <div class="step-label">Farm</div>
+            </div>
+        </div>
+        
+        <form id="signupForm" action="/api/signup" method="POST">
+            <!-- Step 1: Account Information -->
+            <div class="form-step active" id="step1-form">
+                <div class="input-group">
+                    <label for="email" class="required">Email Address</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="your@email.com">
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password" class="required">Password</label>
+                    <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="Create a password">
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                    </div>
+                    <div class="password-hints">
+                        <div class="password-hint" id="lengthHint">
+                            <i class="fas fa-circle"></i>
+                            <span>At least 8 characters</span>
+                        </div>
+                        <div class="password-hint" id="uppercaseHint">
+                            <i class="fas fa-circle"></i>
+                            <span>At least 1 uppercase letter</span>
+                        </div>
+                        <div class="password-hint" id="numberHint">
+                            <i class="fas fa-circle"></i>
+                            <span>At least 1 number</span>
+                        </div>
+                        <div class="password-hint" id="specialHint">
+                            <i class="fas fa-circle"></i>
+                            <span>At least 1 special character</span>
+                        </div>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirmPassword" class="required">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" placeholder="Confirm your password">
+                    <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="nextBtn1" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Profile Information -->
+            <div class="form-step" id="step2-form">
+                <div class="input-group">
+                    <label for="fullName" class="required">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="Your full name">
+                    <div class="error-message" id="fullNameError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (___) ___-____">
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="userType" class="required">I am a</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Select your role</option>
+                        <option value="farmer">Farmer/Producer</option>
+                        <option value="agronomist">Agronomist</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="researcher">Researcher</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="error-message" id="userTypeError"></div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="prevBtn2">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn btn-primary" id="nextBtn2" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Farm Information -->
+            <div class="form-step" id="step3-form">
+                <div class="input-group">
+                    <label for="farmName">Farm/Business Name</label>
+                    <input type="text" id="farmName" name="farmName" placeholder="Your farm or business name">
+                    <div class="error-message" id="farmNameError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="City, Country">
+                    <div class="error-message" id="locationError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="crops">Main Crops/Products (comma separated)</label>
+                    <input type="text" id="crops" name="crops" placeholder="e.g., Wheat, Corn, Soybeans">
+                    <div class="error-message" id="cropsError"></div>
+                </div>
+                
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a></label>
+                    <div class="error-message" id="termsError"></div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="prevBtn3">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span id="submitText">Create Account</span>
+                        <span id="submitSpinner" style="display: none;">
+                            <i class="fas fa-spinner btn-spinner"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="login-link">
+            Already have an account? <a href="/login">Log in</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const steps = document.querySelectorAll('.step');
+            const formSteps = document.querySelectorAll('.form-step');
+            let currentStep = 0;
+        
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const strengthBar = document.getElementById('passwordStrengthBar');
+            const strengthLabel = document.getElementById('passwordStrengthLabel');
+        
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+        
+            toggleConfirmPassword.addEventListener('click', function () {
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+        
+            // Check password strength
+            passwordInput.addEventListener('input', function () {
+                checkPasswordStrength(this.value);
+                validateStep1();
+            });
+        
+            function checkPasswordStrength(password) {
+                const hints = {
+                    length: document.getElementById('lengthHint'),
+                    uppercase: document.getElementById('uppercaseHint'),
+                    number: document.getElementById('numberHint'),
+                    special: document.getElementById('specialHint')
+                };
+        
+                Object.values(hints).forEach(hint => {
+                    hint.classList.remove('valid');
+                    hint.querySelector('i').className = 'fas fa-circle';
+                });
+        
+                let strength = 0;
+                const totalChecks = 4;
+        
+                if (password.length >= 8) {
+                    hints.length.classList.add('valid');
+                    hints.length.querySelector('i').className = 'fas fa-check-circle';
+                    strength++;
+                }
+        
+                if (/[A-Z]/.test(password)) {
+                    hints.uppercase.classList.add('valid');
+                    hints.uppercase.querySelector('i').className = 'fas fa-check-circle';
+                    strength++;
+                }
+        
+                if (/\d/.test(password)) {
+                    hints.number.classList.add('valid');
+                    hints.number.querySelector('i').className = 'fas fa-check-circle';
+                    strength++;
+                }
+        
+                if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    hints.special.classList.add('valid');
+                    hints.special.querySelector('i').className = 'fas fa-check-circle';
+                    strength++;
+                }
+        
+                const width = (strength / totalChecks) * 100;
+                strengthBar.style.width = `${width}%`;
+        
+                if (strength <= 1) {
+                    strengthBar.style.backgroundColor = '#e53935';
+                    strengthLabel.textContent = 'Weak';
+                } else if (strength <= 3) {
+                    strengthBar.style.backgroundColor = '#FFA500';
+                    strengthLabel.textContent = 'Medium';
+                } else {
+                    strengthBar.style.backgroundColor = '#4caf50';
+                    strengthLabel.textContent = 'Strong';
+                }
+        
+                return strength === totalChecks;
+            }
+        
+            // Navigation
+            document.getElementById('nextBtn1').addEventListener('click', () => {
+                if (validateStep1()) goToStep(1);
+            });
+        
+            document.getElementById('prevBtn2').addEventListener('click', () => goToStep(0));
+        
+            document.getElementById('nextBtn2').addEventListener('click', () => {
+                if (validateStep2()) goToStep(2);
+            });
+        
+            document.getElementById('prevBtn3').addEventListener('click', () => goToStep(1));
+        
+            function goToStep(stepIndex) {
+                formSteps[currentStep].classList.remove('active');
+                steps[currentStep].classList.remove('active');
+        
+                formSteps[stepIndex].classList.add('active');
+                steps[stepIndex].classList.add('active');
+        
+                for (let i = 0; i < stepIndex; i++) {
+                    steps[i].classList.add('completed');
+                    steps[i].classList.remove('active');
+                }
+        
+                currentStep = stepIndex;
+            }
+        
+            // Validation: Step 1
+            function validateStep1() {
+                let isValid = true;
+                const email = document.getElementById('email').value;
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+        
+                const emailError = document.getElementById('emailError');
+                if (!email) {
+                    emailError.textContent = 'Email is required';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    emailError.textContent = 'Enter a valid email';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                }
+        
+                const passwordError = document.getElementById('passwordError');
+                if (!password) {
+                    passwordError.textContent = 'Password is required';
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                } else if (password.length < 8) {
+                    passwordError.textContent = 'At least 8 characters required';
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                } else if (!/[A-Z]/.test(password) || !/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    passwordError.textContent = 'Must include uppercase, number & special char';
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    passwordError.style.display = 'none';
+                }
+        
+                const confirmPasswordError = document.getElementById('confirmPasswordError');
+                if (!confirmPassword) {
+                    confirmPasswordError.textContent = 'Please confirm your password';
+                    confirmPasswordError.style.display = 'block';
+                    isValid = false;
+                } else if (password !== confirmPassword) {
+                    confirmPasswordError.textContent = 'Passwords do not match';
+                    confirmPasswordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    confirmPasswordError.style.display = 'none';
+                }
+        
+                document.getElementById('nextBtn1').disabled = !isValid;
+                return isValid;
+            }
+        
+            // Validation: Step 2
+            function validateStep2() {
+                let isValid = true;
+                const fullName = document.getElementById('fullName').value;
+                const userType = document.getElementById('userType').value;
+                const phone = document.getElementById('phone').value;
+        
+                const fullNameError = document.getElementById('fullNameError');
+                const userTypeError = document.getElementById('userTypeError');
+                const phoneError = document.getElementById('phoneError');
+        
+                if (!fullName) {
+                    fullNameError.textContent = 'Full name is required';
+                    fullNameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    fullNameError.style.display = 'none';
+                }
+        
+                if (!userType) {
+                    userTypeError.textContent = 'Please select a role';
+                    userTypeError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    userTypeError.style.display = 'none';
+                }
+        
+                if (phone && !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(phone)) {
+                    phoneError.textContent = 'Enter a valid phone number';
+                    phoneError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    phoneError.style.display = 'none';
+                }
+        
+                document.getElementById('nextBtn2').disabled = !isValid;
+                return isValid;
+            }
+        
+            // Real-time for Step 2
+            document.getElementById('fullName').addEventListener('input', validateStep2);
+            document.getElementById('userType').addEventListener('change', validateStep2);
+            document.getElementById('phone').addEventListener('input', validateStep2);
+        
+            // Final Step: Form Submit
+            document.getElementById('signupForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                if (!validateStep3()) return;
+        
+                const submitText = document.getElementById('submitText');
+                const submitSpinner = document.getElementById('submitSpinner');
+                const submitBtn = document.getElementById('submitBtn');
+        
+                submitText.style.display = 'none';
+                submitSpinner.style.display = 'inline-block';
+                submitBtn.disabled = true;
+        
+                const formData = {
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    fullName: document.getElementById('fullName').value,
+                    phone: document.getElementById('phone').value,
+                    userType: document.getElementById('userType').value,
+                    farmName: document.getElementById('farmName').value,
+                    location: document.getElementById('location').value,
+                    crops: document.getElementById('crops').value,
+                    terms: document.getElementById('terms').checked
+                };
+        
+                try {
+                    const response = await mockSignupApiCall(formData);
+                    if (response.success) {
+                        window.location.href = '/signup-success';
+                    } else {
+                        alert(response.message || 'Signup failed. Try again.');
+                    }
+                } catch (error) {
+                    alert('An error occurred. Try again.');
+                } finally {
+                    submitText.style.display = 'inline-block';
+                    submitSpinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            });
+        
+            function validateStep3() {
+                let isValid = true;
+                const termsError = document.getElementById('termsError');
+                if (!document.getElementById('terms').checked) {
+                    termsError.textContent = 'You must agree to the terms';
+                    termsError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    termsError.style.display = 'none';
+                }
+                return isValid;
+            }
+        
+            async function mockSignupApiCall(formData) {
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                return {
+                    success: true,
+                    message: 'Account created!',
+                    user: {
+                        id: 'user123',
+                        email: formData.email,
+                        name: formData.fullName
+                    }
+                };
+            }
+        });
+        </script>
+        
+</body>
+</html>
